@@ -21,15 +21,11 @@ jobs:
 
       - name: Build backend
         working-directory: ./backend
-        run: |
-          cd backend
-          go build
+        run: go build
           
       - name: Build frontend
         working-directory: ./frontend
-        run: |
-          cd frontend
-          go build
+        run: go build
   
   Testing:
     needs: [Build]
