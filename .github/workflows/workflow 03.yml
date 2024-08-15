@@ -4,7 +4,14 @@ on:
     branches:
       - main
       - workflow-branch
-  
+  pull_request:
+    branches:
+      - main
+      - workflow-branch
+env: 
+  docker_username: ${{ github.actor }} 
+  docker_password: ${{ secrets.GITHUB_TOKEN }}
+  GIT_COMMIT: ${{github.sha}}
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -35,23 +42,53 @@ jobs:
         - name: Clone down repository
           uses: actions/checkout@v4    
 
-        - name: Setup go
-          uses: actions/setup-go@v4
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-app
+          path: frontend/build/frontend-app
+
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    permissions:
+      packages: write
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v4
+      with:
+        name: code
+        path: .
+    - name: build docker
+      run: | 
+      pwd
+      cd /frontend
+      bash ci/build-docker.sh
+      cd /backend
+    - name: push docker
+      run: | 
+      pwd
+      cd ./frontend
+      bash ci/push-docker.sh
+      cd ./backend
+      bash ci/push-docker.sh
+    - name: Setup go
+      uses: actions/setup-go@v4
     
-        - name: Test
-          run: |
-            cd frontend
-            go test frontend -run main_test.go 
+    - name: Test
+       run: |
+        cd frontend
+        go test frontend -run main_test.go 
           #go run main_test
           
-        - name: Upload backend artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: backend-app
-            path: backend/build/backend-app
+    - name: Upload backend artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-app
+        path: backend/build/backend-app
   
-        - name: Upload frontend artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: frontend-app
-            path: frontend/build/frontend-app
+    - name: Upload frontend artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-app
+        path: frontend/build/frontend-app
