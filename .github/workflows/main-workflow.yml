@@ -90,8 +90,6 @@ jobs:
         uses: actions/checkout@v4
       - name: test kubeconfig
         run: |
-          cd cd
-          bash persist.sh
-          ls
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply -f ../container-orchestration
 
