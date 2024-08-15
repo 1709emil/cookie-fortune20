@@ -60,22 +60,22 @@ jobs:
         path: .
     - name: build docker
       run: | 
-      pwd
-      cd /frontend
-      bash ci/build-docker.sh
-      cd /backend
+        pwd
+        cd /frontend
+        bash ci/build-docker.sh
+        cd /backend
     - name: push docker
       run: | 
-      pwd
-      cd ./frontend
-      bash ci/push-docker.sh
-      cd ./backend
-      bash ci/push-docker.sh
+        pwd
+        cd ./frontend
+        bash ci/push-docker.sh
+        cd ./backend
+        bash ci/push-docker.sh
     - name: Setup go
       uses: actions/setup-go@v4
     
     - name: Test
-       run: |
+      run: |
         cd frontend
         go test frontend -run main_test.go 
           #go run main_test
