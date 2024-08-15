@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: eficodeacademy
+          image: ghcr.io/1709emil/cookie-fortune20-frontend:latest

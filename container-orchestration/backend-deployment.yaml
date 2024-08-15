@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: backend
-          image: eficodeacademy/devopsacademyc:latest
+          image: ghcr.io/1709emil/cookie-fortune20-backend:latest
