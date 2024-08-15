@@ -71,13 +71,13 @@ jobs:
       run: | 
         pwd
         cd frontend
-        bash ./ci/build-docker.sh
+        bash /ci/build-docker.sh
         cd ./backend
         bash ./ci/build-docker.sh
     - name: push docker
       run: | 
         pwd
-        cd ./frontend
+        cd frontend
         bash ci/push-docker.sh
         cd ./backend
         bash ci/push-docker.sh
