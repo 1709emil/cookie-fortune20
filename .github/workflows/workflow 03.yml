@@ -20,36 +20,27 @@ jobs:
       - name: Clone down repository
         uses: actions/checkout@v4    
 
-      - name: Setup Go 1.20
+      - name: Setup go
         uses: actions/setup-go@v4
-        with:
-          go-version: 1.20
         #Go can be in version 1.18 up to at least 1.21.
 
-      - name: Install dependencies
-        run: go mod download
-
-        #...
       - name: Build backend
-        working-directory: ./backend
         run: |
-          go mod download
-          go build -o build/backend-app
+          cd backend
+          go build
           
       - name: Build frontend
-        working-directory: ./frontend
         run: |
-          go mod download
-          go build -o build/frontend-app
-      
-      - name: Test
-        run: frontend/main_test.go
-        
-      - name: Upload backend artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-app
-          path: backend/build/backend-app
+          cd frontend
+          go build
+  
+  Testing:
+    needs: [Build]
+    runs-on: ubuntu-latest 
+    steps:
+
+        - name: Clone down repository
+          uses: actions/checkout@v4    
 
       - name: Upload frontend artifact
         uses: actions/upload-artifact@v4
@@ -81,3 +72,23 @@ jobs:
       bash ci/push-docker.sh
       cd ./backend
       bash ci/push-docker.sh
+    - name: Setup go
+      uses: actions/setup-go@v4
+    
+    - name: Test
+       run: |
+        cd frontend
+        go test frontend -run main_test.go 
+          #go run main_test
+          
+    - name: Upload backend artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-app
+        path: backend/build/backend-app
+  
+    - name: Upload frontend artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-app
+        path: frontend/build/frontend-app
