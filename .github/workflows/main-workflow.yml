@@ -91,5 +91,5 @@ jobs:
       - name: test kubeconfig
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          kubectl --kubeconfig kubeconfig apply -f ../container-orchestration
+          kubectl --kubeconfig kubeconfig apply -f /container-orchestration
 
