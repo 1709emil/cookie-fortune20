@@ -17,3 +17,8 @@ spec:
       containers:
         - name: backend
           image: ghcr.io/1709emil/cookie-fortune20-backend:latest
+          env:
+            - name: REDIS_PORT
+              value: "6379"
+          ports: 
+            - containerPort: 8080
