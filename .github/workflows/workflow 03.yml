@@ -70,9 +70,11 @@ jobs:
     - name: build docker
       run: | 
         pwd
-        cd /frontend
+        ls
+        cd frontend
         bash ci/build-docker.sh
-        cd /backend
+        cd ./backend
+        bash ci/build-docker.sh
     - name: push docker
       run: | 
         pwd
