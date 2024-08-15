@@ -20,16 +20,18 @@ jobs:
         #Go can be in version 1.18 up to at least 1.21.
 
       - name: Build backend
-        working-directory: ./backend
-        run: go build
+        run: |
+          cd backend
+          go build
           
       - name: Build frontend
-        working-directory: ./frontend
-        run: go build
+        run: |
+          cd frontend
+          go build
   
   Testing:
     needs: [Build]
-    runs-on: ubuntu:latest  
+    runs-on: ubuntu-latest 
     steps:
         - name: Test
           run: frontend/main_test.go
