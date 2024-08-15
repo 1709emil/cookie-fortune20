@@ -19,31 +19,33 @@ jobs:
           go-version: 1.20
         #Go can be in version 1.18 up to at least 1.21.
 
-      - name: Initialize module
-        run: go mod init redismod
-
-      - name: Get redis
-        run: go get github.com/gomodule/redigo/redis
-
       - name: Build backend
         working-directory: ./backend
-        run: go build -o build/backend-app
+        run: |
+          cd backend
+          go build
           
       - name: Build frontend
         working-directory: ./frontend
-        run: go build -o build/frontend-app
-      
-      - name: Test
-        run: frontend/main_test.go
-        
-      - name: Upload backend artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-app
-          path: backend/build/backend-app
-
-      - name: Upload frontend artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-app
-          path: frontend/build/frontend-app
+        run: |
+          cd frontend
+          go build
+  
+  Testing:
+    needs: [Build]
+    runs-on: ubuntu:latest  
+    steps:
+        - name: Test
+          run: frontend/main_test.go
+          
+        - name: Upload backend artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: backend-app
+            path: backend/build/backend-app
+  
+        - name: Upload frontend artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: frontend-app
+            path: frontend/build/frontend-app
