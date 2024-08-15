@@ -65,26 +65,20 @@ jobs:
     permissions:
       packages: write
     steps:
-    - name: Download frontend
-      uses: actions/download-artifact@v4
-      with:
-        name: frontend-app
-        path: .
-    - name: Download backend
-      uses: actions/download-artifact@v4
-      with:
-        name: backend-app
-        path: .
+    - name: Clone down repository
+      uses: actions/checkout@v4
     - name: build docker
       run: | 
         pwd
-        cd /frontend
-        bash ci/build-docker.sh
-        cd /backend
+        cd frontend
+        bash ../ci/build-docker-frontend.sh
+        cd ../backend
+        bash ../ci/build-docker-backend.sh
     - name: push docker
       run: | 
         pwd
-        cd ./frontend
-        bash ci/push-docker.sh
-        cd ./backend
-        bash ci/push-docker.sh
+        cd frontend
+        bash ../ci/push-docker-frontend.sh
+        cd ../backend
+        bash ../ci/push-docker-backend.sh
+
