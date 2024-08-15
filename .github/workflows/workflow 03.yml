@@ -19,7 +19,12 @@ jobs:
           go-version: 1.20
         #Go can be in version 1.18 up to at least 1.21.
 
-        #...
+      - name: Initialize module
+        run: go mod init redismod
+
+      - name: Get redis
+        run: go get github.com/gomodule/redigo/redis
+
       - name: Build backend
         working-directory: ./backend
         run: go build -o build/backend-app
