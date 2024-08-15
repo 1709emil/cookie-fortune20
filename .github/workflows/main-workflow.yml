@@ -92,5 +92,5 @@ jobs:
         run: |
           cd cd
           bash persist.sh
-          kubectl --kubeconfig kubeconfig --help
+          kubectl --kubeconfig kubeconfig apply -f ../container-orchestration
 
