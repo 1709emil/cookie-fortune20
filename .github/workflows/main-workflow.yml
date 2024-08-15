@@ -87,5 +87,7 @@ jobs:
     needs: [Docker-image]
     steps:
       - name: test kubeconfig
-        run: kubectl --kubeconfig kubeconfig --help
+        run: |
+          bash ../cd/persist.sh
+          kubectl --kubeconfig kubeconfig --help
 
