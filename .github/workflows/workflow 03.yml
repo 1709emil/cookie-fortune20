@@ -31,8 +31,18 @@ jobs:
     needs: [Build]
     runs-on: ubuntu-latest 
     steps:
+
+        - name: Clone down repository
+          uses: actions/checkout@v4    
+
+        - name: Setup go
+          uses: actions/setup-go@v4
+    
         - name: Test
-          run: frontend/main_test.go
+          run: |
+            cd frontend
+            go build main_test.go
+            go run main_test
           
         - name: Upload backend artifact
           uses: actions/upload-artifact@v4
