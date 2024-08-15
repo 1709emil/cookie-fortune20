@@ -90,7 +90,7 @@ jobs:
         uses: actions/checkout@v4
       - name: test kubeconfig
         run: |
-          ls
-          bash ../cd/persist.sh
+          cd cd
+          bash persist.sh
           kubectl --kubeconfig kubeconfig --help
 
