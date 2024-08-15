@@ -22,15 +22,11 @@ jobs:
         #...
       - name: Build backend
         working-directory: ./backend
-        run: |
-          go mod download
-          go build -o build/backend-app
+        run: go build -o build/backend-app
           
       - name: Build frontend
         working-directory: ./frontend
-        run: |
-          go mod download
-          go build -o build/frontend-app
+        run: go build -o build/frontend-app
       
       - name: Test
         run: frontend/main_test.go
