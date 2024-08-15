@@ -81,3 +81,4 @@ jobs:
         bash ../ci/push-docker-frontend.sh
         cd ../backend
         bash ../ci/push-docker-backend.sh
+
