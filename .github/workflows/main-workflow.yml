@@ -82,3 +82,10 @@ jobs:
         cd ../backend
         bash ../ci/push-docker-backend.sh
 
+  Deploy-to-cluster:
+    runs-on: ubuntu-latest
+    needs: [Docker-image]
+    steps:
+      - name: test kubeconfig
+        run: kubectl --kubeconfig kubeconfig --help
+
