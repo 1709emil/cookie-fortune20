@@ -41,7 +41,7 @@ jobs:
         - name: Test
           run: |
             cd frontend
-            go test main_test.go
+            go test frontend -run main_test.go 
           #go run main_test
           
         - name: Upload backend artifact
