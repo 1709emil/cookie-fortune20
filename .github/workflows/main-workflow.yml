@@ -81,7 +81,7 @@ jobs:
         bash ../ci/push-docker-frontend.sh
         cd ../backend
         bash ../ci/push-docker-backend.sh
-
+        
   Deploy-to-cluster:
     runs-on: ubuntu-latest
     needs: [Docker-image]
@@ -92,4 +92,3 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply -f ./container-orchestration/
-
