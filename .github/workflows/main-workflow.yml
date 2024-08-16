@@ -1,4 +1,4 @@
-name: Workflow Automation 03
+name: main-workflow
 on:
   push: 
     branches:
