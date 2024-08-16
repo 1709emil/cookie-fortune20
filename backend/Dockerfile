@@ -16,5 +16,6 @@ WORKDIR /app
 
 COPY --from=builder /app/backend .
 
+EXPOSE 9000
 
 CMD ["./backend"]
