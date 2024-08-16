@@ -91,7 +91,5 @@ jobs:
       - name: test kubeconfig
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          pwd
-          ls -a
           kubectl --kubeconfig kubeconfig apply -f ./container-orchestration/
 
