@@ -16,6 +16,5 @@ WORKDIR /app
 
 COPY --from=builder /app/backend .
 
-EXPOSE 8080
 
 CMD ["./backend"]
