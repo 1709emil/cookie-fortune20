@@ -88,7 +88,7 @@ jobs:
     steps:
       - name: Clone down repository
         uses: actions/checkout@v4
-      - name: test kubeconfig
+      - name: Deploy to Production
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply -f ./container-orchestration/
