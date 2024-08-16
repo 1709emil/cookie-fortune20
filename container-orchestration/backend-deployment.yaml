@@ -18,4 +18,4 @@ spec:
         - name: backend
           image: ghcr.io/1709emil/cookie-fortune20-backend:latest
           ports:
-            - containerport: 9000
+            - containerPort: 9000
