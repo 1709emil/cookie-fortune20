@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine AS builder
+FROM golang:1.21.13-alpine3.20 AS builder
 LABEL authors="pp"
 
 WORKDIR /app
@@ -10,7 +10,7 @@ COPY . .
 
 RUN go build -o backend .
 
-FROM alpine:3.18
+FROM golang:1.21.13-alpine3.20
 
 WORKDIR /app
 
