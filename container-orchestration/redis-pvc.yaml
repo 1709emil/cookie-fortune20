@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: redis-pvc
 spec:
+  storageClassName: "gp2"
   accessModes:
     - ReadWriteOnce
   resources:

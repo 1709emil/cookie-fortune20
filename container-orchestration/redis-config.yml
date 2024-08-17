@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+data: 
+  REDIS_HOST: "redis-host"
+  REDIS_PORT: "6379"
+  REDIS_USER: "superuser"
+  REDIS_DNS: "redis-service"
