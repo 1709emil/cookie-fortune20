@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
   labels:
     app: backend
 spec:
@@ -17,3 +17,5 @@ spec:
       containers:
         - name: backend
           image: ghcr.io/1709emil/cookie-fortune20-backend:latest
+          ports:
+            - containerPort: 9000
