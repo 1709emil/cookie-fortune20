@@ -20,9 +20,9 @@ spec:
           ports:
             - containerPort: 6379
           volumeMounts:
-            - mountPath: /data  #Redis stores its data in /data directory, right?
-              name: redis-storage
+            - mountPath: /data
+              name: redis-data
       volumes:
-        - name: redis-storage
+        - name: redis-data
           persistentVolumeClaim:
-            claimName: redis-pvc 
+            claimName: redis-pvc
