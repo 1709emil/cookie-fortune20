@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:latest
+          image: redis:7.4.0
           ports:
             - containerPort: 6379
           volumeMounts:
             - mountPath: /data
-              name: redis-data
+              name: redis-pvc
       volumes:
-        - name: redis-data
+        - name: redis-pvc
           persistentVolumeClaim:
             claimName: redis-pvc

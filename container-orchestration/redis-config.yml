@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: redis-config
 data: 
-  REDIS_HOST: "redis-host"
+  REDIS_HOST: "redis-service"
   REDIS_PORT: "6379"
-  REDIS_USER: "superuser"
-  REDIS_DNS: "redis-service"
+  REDIS_NAME: bob
+  REDIS_USER: superuser
+  REDIS_DNS: redis-service
