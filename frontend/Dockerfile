@@ -1,4 +1,4 @@
-FROM golang:1.20 AS builder
+FROM golang:1.21.13-alpine3.20 AS builder
 LABEL authors="pp"
 
 WORKDIR /app
@@ -6,15 +6,16 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 
-COPY *.go ./
 
-COPY . .
+COPY *.go ./
 
 RUN go build -o frontend .
 
-FROM alpine:3.18
+FROM golang:1.21.13-alpine3.20
 
 WORKDIR /app
+
+COPY . .
 
 COPY --from=builder /app/frontend .
 
