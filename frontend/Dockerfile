@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=builder /app/frontend .
 
 EXPOSE 8080
-
+CMD ["ls -a"]
 CMD ["./frontend"]
 
 
