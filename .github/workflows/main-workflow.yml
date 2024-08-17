@@ -104,3 +104,12 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply -f ./container-orchestration/
+  Test-Production:
+    runs-on: ubuntu:latest
+    needs: [Deploy-to-production]
+    steps:
+      - name: Production test
+        run: |
+          cd ci
+          bash test.sh
+  
