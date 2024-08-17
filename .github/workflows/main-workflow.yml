@@ -90,3 +90,11 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply -f ./container-orchestration/
+  Application-testing:
+    runs-on: ubuntu-latest
+    needs: [Deploy-to-cluster]
+    steps:
+      - name: Testing application
+        run: |
+          cd ci
+          bash test.sh
