@@ -14,6 +14,10 @@ spec:
       labels:
         app: backend
     spec:
+      initContainers:
+        - name: wait-for-redis
+          image: busybox
+          command: ['sh', '-c', 'until nc -z redis-service 6379; do echo "Waiting for Redis..."; sleep 2; done;']
       containers:
         - name: backend
           image: ghcr.io/1709emil/cookie-fortune20-backend:latest
